@@ -14,6 +14,12 @@
 		BF5C58F42BB447B9003C0A53 /* SICONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5C58F32BB447B9003C0A53 /* SICONTests.swift */; };
 		BF5C58FE2BB447B9003C0A53 /* SICONUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5C58FD2BB447B9003C0A53 /* SICONUITests.swift */; };
 		BF5C59002BB447B9003C0A53 /* SICONUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5C58FF2BB447B9003C0A53 /* SICONUITestsLaunchTests.swift */; };
+		BFABA9D72BBADAEB00FCA61B /* VehicleNumberSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9D62BBADAEB00FCA61B /* VehicleNumberSeeder.swift */; };
+		BFABA9D92BBADB2000FCA61B /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9D82BBADB2000FCA61B /* AppViewModel.swift */; };
+		BFABA9DB2BBADB4100FCA61B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9DA2BBADB4100FCA61B /* CustomButton.swift */; };
+		BFABA9DD2BBADB6600FCA61B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9DC2BBADB6600FCA61B /* SearchResult.swift */; };
+		BFABA9DF2BBADB8E00FCA61B /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */; };
+		BFABA9E12BBADC4F00FCA61B /* VehicleNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +50,12 @@
 		BF5C58F92BB447B9003C0A53 /* SICONUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SICONUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5C58FD2BB447B9003C0A53 /* SICONUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SICONUITests.swift; sourceTree = "<group>"; };
 		BF5C58FF2BB447B9003C0A53 /* SICONUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SICONUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BFABA9D62BBADAEB00FCA61B /* VehicleNumberSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleNumberSeeder.swift; sourceTree = "<group>"; };
+		BFABA9D82BBADB2000FCA61B /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		BFABA9DA2BBADB4100FCA61B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		BFABA9DC2BBADB6600FCA61B /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
+		BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +110,12 @@
 				BF5C58E42BB447B8003C0A53 /* ContentView.swift */,
 				BF5C58E62BB447B9003C0A53 /* Assets.xcassets */,
 				BF5C58E82BB447B9003C0A53 /* Preview Content */,
+				BFABA9D62BBADAEB00FCA61B /* VehicleNumberSeeder.swift */,
+				BFABA9D82BBADB2000FCA61B /* AppViewModel.swift */,
+				BFABA9DA2BBADB4100FCA61B /* CustomButton.swift */,
+				BFABA9DC2BBADB6600FCA61B /* SearchResult.swift */,
+				BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */,
+				BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */,
 			);
 			path = SICON;
 			sourceTree = "<group>";
@@ -257,8 +275,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFABA9D72BBADAEB00FCA61B /* VehicleNumberSeeder.swift in Sources */,
 				BF5C58E52BB447B8003C0A53 /* ContentView.swift in Sources */,
+				BFABA9D92BBADB2000FCA61B /* AppViewModel.swift in Sources */,
 				BF5C58E32BB447B8003C0A53 /* SICONApp.swift in Sources */,
+				BFABA9DD2BBADB6600FCA61B /* SearchResult.swift in Sources */,
+				BFABA9DB2BBADB4100FCA61B /* CustomButton.swift in Sources */,
+				BFABA9DF2BBADB8E00FCA61B /* DataScannerView.swift in Sources */,
+				BFABA9E12BBADC4F00FCA61B /* VehicleNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,8 +446,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SICON/Preview Content\"";
+				DEVELOPMENT_TEAM = 7DK5H7RWQJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan license plate number";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -450,8 +476,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SICON/Preview Content\"";
+				DEVELOPMENT_TEAM = 7DK5H7RWQJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app needs camera access to scan license plate number";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

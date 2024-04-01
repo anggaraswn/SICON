@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct CustomButton: View {
+    var text: String
+    var image: String?
+    var action: (() -> Void)?
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            action?()
+        }){
+                Label(text, systemImage: image ?? "")
+                    .frame(width: 299, height: 40)
+                    .font(.system(size: 20, weight: .bold, design: .default))
+        }
+            .buttonStyle(.borderedProminent)
     }
-}
-
-#Preview {
-    CustomButton()
 }
