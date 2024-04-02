@@ -19,7 +19,9 @@ struct CustomButton: View {
                 Label(text, systemImage: image ?? "")
                     .frame(width: 299, height: 40)
                     .font(.system(size: 20, weight: .bold, design: .default))
+                    .foregroundColor(Color("text"))
         }
             .buttonStyle(.borderedProminent)
+            .tint(Color("primaryCol"))
     }
 }

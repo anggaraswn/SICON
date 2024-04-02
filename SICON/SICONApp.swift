@@ -23,7 +23,7 @@ struct SICONApp: App {
     init(){
         let schema = Schema([VehicleNumber.self])
         self.container = try! ModelContainer(for: schema, configurations: [])
-        VehicleNumberSeeder().seedData(in: container.mainContext)
+//        VehicleNumberSeeder().seedData(in: container.mainContext)
 //        do{
 //            try container.mainContext.delete(model: VehicleNumber.self)
 //        } catch{

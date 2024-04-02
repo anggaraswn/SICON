@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SearchResult: View {
+    @Binding var path: NavigationPath
     @Query var searchedVehicle: [VehicleNumber]
 //    var data: [VehicleNumber]
     
@@ -39,23 +40,45 @@ struct SearchResult: View {
                 .font(.system(size: 24, weight: .bold, design: .default))
                 .foregroundColor(.white)
                 .padding(.top, 5)
-                .padding(.bottom, 10)
-            Spacer()
+                .padding(.bottom, 135)
             VehicleNumberRectangle(vehicleNumber: searchedVehicle.first?.number ?? "")
-            Spacer()
+                .padding(.bottom, 115)
             Text(searchedVehicle.first?.ownerName ?? "")
                 .font(.system(size: 32, weight: .bold, design: .default))
                 .foregroundColor(.white)
-                .padding(.bottom, 10)
+                .padding(.bottom, 20)
             Text(searchedVehicle.first?.workplace ?? "")
                 .font(.system(size: 24, weight: .regular, design: .default))
-                .padding(.bottom, 12)
+                .padding(.bottom, 20)
             Text("(+62) \(searchedVehicle.first?.contact ?? "")")
                 .font(.system(size: 16, weight: .light, design: .default))
             Spacer()
             CustomButton(text: "Notify", action: notify)
+                .padding(.bottom, 54)
         }
+        .toolbar{
+            ToolbarItem(placement: .topBarLeading){
+                if !path.isEmpty{
+//                    Button("Scan"){
+//                        path.removeLast()
+//                    }
+                    Button(action: {
+                        path.removeLast()
+                    }, label: {
+                        HStack{
+                            Image(systemName: "chevron.left")
+                            Text("Scan")
+                        }
+                    })
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
         .padding(10)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+        .background{
+                Color("background").ignoresSafeArea()
+            }
     }
 }
 

@@ -18,7 +18,6 @@ struct ContentView: View {
     @State private var searchedData: [VehicleNumber] = []
     @State private var path = NavigationPath()
     @Query() var vehicleNumbers: [VehicleNumber] = []
-//    @Query var searchedVehicle: [VehicleNumber]
     
     var searchVehicleQuery: Query<VehicleNumber, [VehicleNumber]>{
         var predicate: Predicate<VehicleNumber>?
@@ -30,12 +29,6 @@ struct ContentView: View {
     }
     
     func searchVehicle(){
-//        let searchResult = #Predicate<VehicleNumber>{$0.number.contains(vehicleNumber)}
-//        @Query(filter: #Predicate<VehicleNumber> {$0.number.contains(self.vehicleNumber)}) var searchResult: VehicleNumber?
-//        _searchedVehicle = searchResult
-//        print(searchResult)
-//        _searchedVehicle = Query(filter: #Predicate{$0.number.contains(self.vehicleNumber)})
-        
         let filteredVehicleNumbers = vehicleNumbers.filter { $0.number.lowercased() == inputtedVehicleNumber.lowercased() }
             
         if !filteredVehicleNumbers.isEmpty {
@@ -57,8 +50,7 @@ struct ContentView: View {
                 mainView
                     .navigationDestination(for: String.self){view in
                         if view == "SearchResult"{
-//                            SearchResult(data: searchedData)
-                            SearchResult(_searchedVehicle: searchVehicleQuery)
+                            SearchResult(path: $path,_searchedVehicle: searchVehicleQuery)
                         }
                     }
             case .cameraNotAvailable:
@@ -71,20 +63,25 @@ struct ContentView: View {
                 Text("Requesting camera access")
             }
         }
+        .navigationTitle("Scan")
     }
     
     
     private var mainView: some View {
         VStack {
             Text("Scan Here")
-                .font(.system(size: 24, weight: .bold, design: .default))
-                .foregroundColor(.white)
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .foregroundColor(Color("text"))
                 .padding(.top, 5)
-                .padding(.bottom, 10)
+                .padding(.bottom, 16)
             scanView
             contentView
         }
         .padding(10)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+        .background{
+                Color("background").ignoresSafeArea()
+            }
     }
     
     private var scanView: some View{
@@ -108,53 +105,56 @@ struct ContentView: View {
     
     private var contentView: some View{
             VStack{
-//                Divider()
-//                    .frame(height: 2)
-//                    .overlay(.primary)
-//                    .padding(.vertical, 50)
-                TextField("Plat Nomor",text: Binding<String>(
-                    get: {
-                        switch vm.recognizedItems.first{
-                        case .text(let text):
-                            text.transcript
-                        default:
-                            inputtedVehicleNumber
+                ZStack{
+                    TextField("",text: Binding<String>(
+                        get: {
+                            switch vm.recognizedItems.first{
+                            case .text(let text):
+                                text.transcript
+                            default:
+                                inputtedVehicleNumber
+                            }
+                        },
+                        set: { newValue in
+                            inputtedVehicleNumber = newValue
                         }
-                    },
-                    set: { newValue in
-                        inputtedVehicleNumber = newValue
+                    )).onChange(of: !vm.recognizedItems.isEmpty) {
+                        switch vm.recognizedItems.first{
+                            case .text(let text):
+                                inputtedVehicleNumber = text.transcript
+                            default:
+                            inputtedVehicleNumber = inputtedVehicleNumber
+                        }
                     }
-                )).onChange(of: !vm.recognizedItems.isEmpty) {
-                    switch vm.recognizedItems.first{
-                        case .text(let text):
-                            inputtedVehicleNumber = text.transcript
-                        default:
-                        inputtedVehicleNumber = inputtedVehicleNumber
+                        .background(.white)
+                        .foregroundColor(Color("grey"))
+                        .cornerRadius(5.0)
+                        .padding(.horizontal, 10)
+                        .padding(.top, 23)
+                        .font(.title)
+                    
+                    if inputtedVehicleNumber.isEmpty{
+                        Text("License Plate Number")
+                            .font(.system(size: 18, weight: .regular, design: .default))
+                            .foregroundStyle(Color("grey"))
+                            .padding(.leading, 20)
+                            .padding(.top, 26)
+                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                     }
                 }
-                    .background(.white)
-                    .foregroundColor(.gray)
-                    .cornerRadius(5.0)
-                    .padding(.horizontal, 10)
-                    .padding(.top, 28)
-                    .font(.title)
-    //                .font(.system(size: 17, weight: .semibold, design: .default))
-    //                .frame(height: 30)
-    //                .textFieldStyle(.roundedBorder)
-                
-    //            ForEach(vehicleNumbers){ number in
-    //                Text("\(number.ownerName)")
-    //            }
                 Spacer()
                 CustomButton(text: "Search", image: "magnifyingglass", action: self.searchVehicle)
+                    .padding(.bottom, 54)
                     .alert(isPresented: $isInvalid, content: {
                         Alert(
-                            title: Text("Invalid Vehicle Number"),
-                            message: Text("The vehicle number is not registered!")
+                            title: Text("Invalid License Number"),
+                            message: Text("This vehicle may be not registered as a member!")
                         )
                     })
             }
         }
+    
+    
 }
 
 //#Preview {
