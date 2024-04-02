@@ -4,7 +4,6 @@
 //
 //  Created by Anggara Satya Wimala Nelwan on 27/03/24.
 //
-//test alis
 import SwiftUI
 import SwiftData
 
@@ -17,6 +16,7 @@ struct ContentView: View {
     @State private var showSearchResult: Bool = false
     @State private var searchedData: [VehicleNumber] = []
     @State private var path = NavigationPath()
+    @State private var verified: Bool = false
     @Query() var vehicleNumbers: [VehicleNumber] = []
     
     var searchVehicleQuery: Query<VehicleNumber, [VehicleNumber]>{
@@ -45,25 +45,30 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $path){
-            switch vm.dataScannerAccessStatus {
-            case .scannerAvailable:
-                mainView
-                    .navigationDestination(for: String.self){view in
-                        if view == "SearchResult"{
-                            SearchResult(path: $path,_searchedVehicle: searchVehicleQuery)
+            if !verified{
+                FaceVerification(verified: $verified)
+            } else{
+                switch vm.dataScannerAccessStatus {
+                case .scannerAvailable:
+                    mainView
+                        .navigationDestination(for: String.self){view in
+                            if view == "SearchResult"{
+                                SearchResult(path: $path,_searchedVehicle: searchVehicleQuery)
+                            }
                         }
-                    }
-            case .cameraNotAvailable:
-                Text("Your device doesn't have a camera")
-            case .scannerNotAvailable:
-                Text("Your device doesn't have support for scanning barcode with this app")
-            case .cameraAccessNotGranted:
-                Text("Please provide access to the camera in settings")
-            case .notDetermined:
-                Text("Requesting camera access")
+                case .cameraNotAvailable:
+                    Text("Your device doesn't have a camera")
+                case .scannerNotAvailable:
+                    Text("Your device doesn't have support for scanning barcode with this app")
+                case .cameraAccessNotGranted:
+                    Text("Please provide access to the camera in settings")
+                case .notDetermined:
+                    Text("Requesting camera access")
+                }
             }
         }
         .navigationTitle("Scan")
+        
     }
     
     
@@ -139,6 +144,7 @@ struct ContentView: View {
                             .foregroundStyle(Color("grey"))
                             .padding(.leading, 20)
                             .padding(.top, 26)
+                            .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                     }
                 }
@@ -153,8 +159,6 @@ struct ContentView: View {
                     })
             }
         }
-    
-    
 }
 
 //#Preview {
