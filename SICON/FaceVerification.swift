@@ -10,40 +10,48 @@ import LocalAuthentication
 
 struct FaceVerification: View {
     @Binding var verified: Bool
+    @State private var path = NavigationPath()
 
     var body: some View {
-        VStack{
-            Text("App Locked")
-                .font(.system(size: 20, weight: .medium, design: .default))
-                .foregroundColor(Color("text"))
-            Text("Use Face ID to Open the App")
-                .font(.system(size: 15, weight: .medium, design: .default))
-                .foregroundColor(Color("text"))
-            Spacer()
-            Image(systemName: "faceid")
-                .resizable()
-                .foregroundColor(Color("text"))
-                .frame(width: 86, height: 86)
-                .padding(.bottom, 12)
-            Text("Face ID")
-                .font(.system(size: 17, weight: .regular, design: .default))
-                .foregroundColor(Color("text"))
-            Spacer()
-            CustomButton(text: "Face ID Verification")
-                .padding(.bottom, 11)
-            Button(action: {
-                
-            }, label: {
-                Text("Enter Passcode Instead")
+        NavigationStack(path: $path){
+            VStack{
+                Text("App Locked")
+                    .font(.system(size: 20, weight: .medium, design: .default))
+                    .foregroundColor(Color("text"))
+                Text("Use Face ID to Open the App")
+                    .font(.system(size: 15, weight: .medium, design: .default))
+                    .foregroundColor(Color("text"))
+                Spacer()
+                Image(systemName: "faceid")
+                    .resizable()
+                    .foregroundColor(Color("text"))
+                    .frame(width: 86, height: 86)
+                    .padding(.bottom, 12)
+                Text("Face ID")
                     .font(.system(size: 17, weight: .regular, design: .default))
-                    .foregroundColor(Color("secondaryCol"))
-            })
+                    .foregroundColor(Color("text"))
+                Spacer()
+                CustomButton(text: "Face ID Verification", action: verify)
+                    .padding(.bottom, 11)
+                Button(action: {
+                    path.append("PasscodeVerification")
+                }, label: {
+                    Text("Enter Passcode Instead")
+                        .font(.system(size: 17, weight: .regular, design: .default))
+                        .foregroundColor(Color("secondaryCol"))
+                })
+            }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            .background{
+                Color("background").ignoresSafeArea()
+            }
+            .onAppear(perform: verify)
+            .navigationDestination(for: String.self){view in
+                if view == "PasscodeVerification"{
+                    PasscodeVerification(path: $path, verified: $verified)
+                }
+            }
         }
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-        .background{
-            Color("background").ignoresSafeArea()
-        }
-        .onAppear(perform: verify)
     }
     
     func verify(){

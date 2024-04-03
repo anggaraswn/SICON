@@ -17,31 +17,62 @@ struct ContentView: View {
     @State private var searchedData: [VehicleNumber] = []
     @State private var path = NavigationPath()
     @State private var verified: Bool = false
+    @State private var isScannerActive = false
+    @State private var timerSet: Date? = nil
     @Query() var vehicleNumbers: [VehicleNumber] = []
     
     var searchVehicleQuery: Query<VehicleNumber, [VehicleNumber]>{
         var predicate: Predicate<VehicleNumber>?
         if !inputtedVehicleNumber.isEmpty{
-            predicate = .init(#Predicate{$0.number.contains(inputtedVehicleNumber)})
+            let processedVehicleNumber = inputtedVehicleNumber.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+//            let str = inputtedVehicleNumber.uppercased()
+            predicate = .init(#Predicate{$0.number.contains(processedVehicleNumber)})
         }
         
         return Query(filter: predicate)
     }
     
     func searchVehicle(){
-        let filteredVehicleNumbers = vehicleNumbers.filter { $0.number.lowercased() == inputtedVehicleNumber.lowercased() }
+        let processedVehicleNumber = inputtedVehicleNumber.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        let filteredVehicleNumbers = vehicleNumbers.filter { $0.number == processedVehicleNumber }
+        
+//        let filteredVehicleNumbers = vehicleNumbers.filter { $0.number == inputtedVehicleNumber.uppercased() }
             
         if !filteredVehicleNumbers.isEmpty {
-            print(filteredVehicleNumbers.first?.ownerName ?? "")
+            print(inputtedVehicleNumber+"test")
             isInvalid = false
             searchedData = filteredVehicleNumbers
             path.append("SearchResult")
             showSearchResult = true
         }else{
+            print(inputtedVehicleNumber+"test")
             isInvalid = true
             showSearchResult = false
         }
     }
+    
+    func setSession() {
+        print(verified)
+        let sessionLength: TimeInterval = 15 * 60 // 15 minutes in seconds as a Double
+        let timerSetSnapshot = Date() // Take a snapshot of the current time
+        self.timerSet = timerSetSnapshot // Store the current time when the timer is set
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + sessionLength) { [timerSetSnapshot] in
+            // Calculate the time interval since timerSetSnapshot
+            let timePassed = Date().timeIntervalSince(timerSetSnapshot)
+            
+            // Check if the time passed is greater than or equal to sessionLength
+            if timePassed >= sessionLength {
+                DispatchQueue.main.async {
+                    self.verified = false
+                    print("Session expired")
+                }
+            }
+        }
+    }
+
+
     
     var body: some View {
         NavigationStack(path: $path){
@@ -68,7 +99,6 @@ struct ContentView: View {
             }
         }
         .navigationTitle("Scan")
-        
     }
     
     
@@ -79,8 +109,19 @@ struct ContentView: View {
                 .foregroundColor(Color("text"))
                 .padding(.top, 5)
                 .padding(.bottom, 16)
-            scanView
+            if isScannerActive{
+                scanView
+            }
             contentView
+        }
+        .onAppear{
+            isScannerActive = true
+            if verified{
+                setSession()
+            }
+        }
+        .onDisappear{
+            isScannerActive = false
         }
         .padding(10)
         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
@@ -149,7 +190,7 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
-                CustomButton(text: "Search", image: "magnifyingglass", action: self.searchVehicle)
+                CustomButton(text: "Search", action: self.searchVehicle)
                     .padding(.bottom, 54)
                     .alert(isPresented: $isInvalid, content: {
                         Alert(

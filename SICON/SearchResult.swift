@@ -19,7 +19,8 @@ struct SearchResult: View {
         if contact.contains("-"){
             contact = contact.replacingOccurrences(of: "-", with: "")
         }
-        let message = "Dear, \(searchedVehicle.first?.workplace ?? "") There is a \(searchedVehicle.first?.vehicle ?? "") in the parking spot that got  \((searchedVehicle.first?.vehicle ?? "") == "motorcycle" ? "steering locked" : "hand braked") with license plate number \(searchedVehicle.first?.number ?? ""), please help us to notify \(searchedVehicle.first?.ownerName ?? "") as the owner to come down, thank you"
+//        let message = "Dear, \(searchedVehicle.first?.workplace ?? "") There is a \(searchedVehicle.first?.vehicle ?? "") in the parking spot that got  \((searchedVehicle.first?.vehicle ?? "") == "motorcycle" ? "steering locked" : "hand braked") with license plate number \(searchedVehicle.first?.number ?? ""), please help us to notify \(searchedVehicle.first?.ownerName ?? "") as the owner to come down, thank you"
+        let message = "Yth, \(searchedVehicle.first?.workplace ?? "") \n\nTerdapat \(searchedVehicle.first?.vehicle ?? "") di tempat parkir yang telah \(searchedVehicle.first?.vehicle ?? "" == "motorcycle" ? "dikunci setang" : "dipasang rem tangan") dengan nomor plat \(searchedVehicle.first?.number ?? ""), mohon bantuannya untuk memberitahukan \(searchedVehicle.first?.ownerName ?? "") sebagai pemilik untuk segera turun, terima kasih."
         let urlString = "https://api.whatsapp.com/send?phone=\(countryCode)\(contact)&text=\(message)"
         print(urlString)
         let urlStringEncoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)

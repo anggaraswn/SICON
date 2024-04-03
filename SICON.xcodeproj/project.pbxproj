@@ -20,6 +20,7 @@
 		BFABA9DD2BBADB6600FCA61B /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9DC2BBADB6600FCA61B /* SearchResult.swift */; };
 		BFABA9DF2BBADB8E00FCA61B /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */; };
 		BFABA9E12BBADC4F00FCA61B /* VehicleNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */; };
+		BFB101B92BBD2AA0007C5093 /* PasscodeVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB101B82BBD2AA0007C5093 /* PasscodeVerification.swift */; };
 		BFD3B3E62BBC658E005B17A1 /* FaceVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3B3E52BBC658E005B17A1 /* FaceVerification.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		BFABA9DC2BBADB6600FCA61B /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
 		BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleNumber.swift; sourceTree = "<group>"; };
+		BFB101B82BBD2AA0007C5093 /* PasscodeVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeVerification.swift; sourceTree = "<group>"; };
 		BFD3B3E52BBC658E005B17A1 /* FaceVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceVerification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				BFABA9DE2BBADB8E00FCA61B /* DataScannerView.swift */,
 				BFABA9E02BBADC4F00FCA61B /* VehicleNumber.swift */,
 				BFD3B3E52BBC658E005B17A1 /* FaceVerification.swift */,
+				BFB101B82BBD2AA0007C5093 /* PasscodeVerification.swift */,
 			);
 			path = SICON;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				BF5C58E52BB447B8003C0A53 /* ContentView.swift in Sources */,
 				BFABA9D92BBADB2000FCA61B /* AppViewModel.swift in Sources */,
 				BF5C58E32BB447B8003C0A53 /* SICONApp.swift in Sources */,
+				BFB101B92BBD2AA0007C5093 /* PasscodeVerification.swift in Sources */,
 				BFD3B3E62BBC658E005B17A1 /* FaceVerification.swift in Sources */,
 				BFABA9DD2BBADB6600FCA61B /* SearchResult.swift in Sources */,
 				BFABA9DB2BBADB4100FCA61B /* CustomButton.swift in Sources */,
